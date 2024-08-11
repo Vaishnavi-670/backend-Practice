@@ -7,7 +7,7 @@ const port =5000; //this line is used to set the port number to 5000
 
 //middleware
 
-app.use(express.json());
+app.use(express.json()); //this line is used to parse the incoming request body as JSON. This is necessary to access the request body in the request object.
 app.use('/user', UserRouter); //this line is used to use the userRouter as a middleware in the express app. This means that all the routes defined in the userRouter will be accessible under the /user path.
 
 //route or express
