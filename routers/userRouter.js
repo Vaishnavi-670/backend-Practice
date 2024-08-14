@@ -36,7 +36,7 @@ router.get('/getbyemail/:email',(req,res)=>{
         console.log(err);
         res.status(500).json(err);
     });
-})
+});
 //getbycity
 router.get('/getbycity/:city',(req,res)=>{
     Model.find({ city:req.params.city})
@@ -47,11 +47,17 @@ router.get('/getbycity/:city',(req,res)=>{
         console.log(err);
         res.status(500).json(err);
     });
-})
+});
 //getbyid
 router.get('/getbyid/:id', (req, res) => {
-    console.log(req.params.id); // to get the id from the url parameters. params means the parameters passed in the url.
-    res.send('Response from getbyid');
+    Model.findById(req.params.id)
+    .then((result) => {
+        res.status(200).json(result);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 //update
 router.get('/update', (req, res) => {
@@ -60,8 +66,15 @@ router.get('/update', (req, res) => {
 
 //delete
 
-router.get('/delete', (req, res) => {
-    res.send('Response from delete');
+router.delete('/delete/:id', (req, res) => {
+    Model.findByIdAndDelete(req.params.id)
+   .then((results) => {
+    res.status(200).json(results);
+   })
+   .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 module.exports = router;
