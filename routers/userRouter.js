@@ -17,8 +17,37 @@ router.post('/add', (req, res) => {
 
 //getall
 router.get('/getall', (req, res) => {
-    res.send('Response from getall');
+    Model.find() //model.find use for find the data in the  requested collection
+    .then((result) =>{
+        res.status(200).json(result);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
+//getbyemail
+router.get('/getbyemail/:email',(req,res)=>{
+    Model.findOne({ email:req.params.email})
+    .then((result) => {
+        res.status(200).json(result);
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+})
+//getbycity
+router.get('/getbycity/:city',(req,res)=>{
+    Model.find({ city:req.params.city})
+   .then((results)=>{
+    res.status(200).json(results);
+   })
+   .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+})
 //getbyid
 router.get('/getbyid/:id', (req, res) => {
     console.log(req.params.id); // to get the id from the url parameters. params means the parameters passed in the url.
