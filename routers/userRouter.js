@@ -61,7 +61,7 @@ router.get('/getbyid/:id', (req, res) => {
 });
 //update
 router.put('/update/:id', (req, res) => {
-    Model.findByIdAndUpdate(req.params.id, req.body)
+    Model.findByIdAndUpdate(req.params.id, req.body, {new:true}) //new true value is used to get the updated data from the database
     .then((result) => {
         res.status(200).json(result);
     })
