@@ -11,7 +11,13 @@ router.post('/add', (req, res) => {
             res.status(200).json(result);
         })
         .catch((err) => {
-            res.status(500).json(err);
+            if(err.code === 11000){
+                res.status(400).json({ message: 'Email already exists' });
+            }
+            else{
+                res.status(400).json(err);
+            }
+            res.status(500).json({message: 'Internal server error'});
         });
 });
 
